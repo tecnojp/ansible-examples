@@ -1,0 +1,5 @@
+collections:
+  # Install a collection from Ansible Galaxy.
+  - name: veeamhub.veeam.veeam_vas
+    version: ">=2.2.3"
+    source: https://galaxy.ansible.com
