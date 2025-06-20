@@ -1,0 +1,10 @@
+---
+# This playbook uses the ping module to test connectivity to raspberry hosts
+- name: Ping 
+  gather_facts: true
+  hosts: all 
+
+  tasks:
+  - name: ping
+    ping:
+

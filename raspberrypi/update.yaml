@@ -1,0 +1,17 @@
+---
+# This playbook uses the update module to test connectivity to Windows hosts
+- name: apt Update && Upgrade 
+  gather_facts: true
+  hosts: all
+
+  tasks:
+  - name: Run the equivalent of "apt-get update"as a separate step
+    apt:
+      update_cache: true
+      cache_valid_time: 3600
+    become: true
+
+  - name: Update all packages to the latest version
+    apt:
+      upgrade: dist
+    become: true
