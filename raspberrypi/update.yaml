@@ -1,6 +1,6 @@
 ---
 # This playbook uses the update module to test connectivity to Windows hosts
-- name: apt Update && Upgrade 
+- name: Raspberry Update && Upgrade && Install Pi-Hole
   gather_facts: true
   hosts: all
 
@@ -15,3 +15,24 @@
     apt:
       upgrade: dist
     become: true
+
+  # curl -sSL https://get.docker.com | sh
+  - name: Donwload Docker script
+    ansible.builtin.get_url:
+      url: https://get.docker.com
+      dest: /tmp/install.sh
+      mode: '0755'
+
+  - name: Install Docker
+    ansible.builtin.shell: "/tmp/install.sh"
+
+  - name: Copy pi-hole Compose file
+    ansible.builtin.copy:
+      src: docker-compose.yaml
+      dest: /tmp/pi-hole/docker-compose.yaml
+
+  - name: Deploy docker Compose
+    community.docker.docker_compose_v2:
+      project_src: /tmp/pi-hole/
+      files:
+      - docker-compose.yaml
