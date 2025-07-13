@@ -30,7 +30,7 @@
   - name: Copy pi-hole Compose file
     ansible.builtin.copy:
       src: docker-compose.yaml
-      dest: /tmp/pi-hole/docker-compose.yaml
+      dest: /tmp/pi-hole/
 
   - name: Deploy docker Compose
     community.docker.docker_compose_v2:
