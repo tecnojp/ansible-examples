@@ -25,6 +25,7 @@
 
   - name: Install Docker
     ansible.builtin.shell: "/tmp/install.sh"
+    ignore_errors: true
 
   - name: Copy pi-hole Compose file
     ansible.builtin.copy:
